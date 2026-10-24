@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>persolan_site</title>
+
+  <!-- Барлық стиль осы бөлек файлда -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- 1) Фон слайдшоу.
+       Іші бос — суреттердің <div>-тері JS арқылы осында қосылады. -->
+  <div class="slideshow" id="slideshow"></div>
+
+  <!-- 2) Қараңғы overlay.
+       Фон суреттің үстіне жеңіл қара қабат — мәтін оқылатын болу үшін. -->
+  <div class="overlay"></div>
+
+  <!-- 3) Негізгі мазмұн.
+       Мұнда сайттың нақты контенті болады (әзірге мысал мәтін). -->
+  <main class="content">
+    <h1>Dulaty</h1>
+    <p>It's my personal website</p>
+
+    <!-- Dulaty жазуының астындағы 2 батырма — әрқайсысы жеке бетке апарады -->
+    <div class="actions">
+      <a class="btn" href="personality.html">personality</a>
+      <a class="btn" href="technically.html">technically</a>
+    </div>
+  </main>
+
+  <!-- Фондық музыка. Браузер рұқсат етуі үшін бастапқыда muted + autoplay. -->
+  <audio id="bg-music" src="assets/audio/music.mp3" loop autoplay muted preload="auto"></audio>
+
+  <!-- Дыбысты қосу/өшіру батырмасы (төменгі оң бұрыш) -->
+  <button id="sound-toggle" class="sound-toggle" type="button" aria-label="Дыбысты қосу">🔇</button>
+
+  <!-- Барлық логика осы бөлек файлда.
+       Ең соңында тұр — үстіндегі HTML дайын болғаннан кейін іске қосылады. -->
+  <script src="script.js"></script>
+
+</body>
+</html>

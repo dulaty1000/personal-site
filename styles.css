@@ -1,0 +1,176 @@
+/* ============================================================
+   0) Негізгі reset — браузердің әдепкі шеттерін нөлдеу
+   ============================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* padding/border элемент еніне қосылмайды */
+}
+
+html,
+body {
+  height: 100%; /* .content-ке 100vh биіктік беру үшін керек */
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: #fff;
+  overflow-x: hidden; /* көлденең скролл болмасын */
+}
+
+/* ============================================================
+   1) SLIDESHOW — толық экранды фон контейнері
+   ============================================================ */
+.slideshow {
+  position: fixed;   /* бет скролл болса да орнында тұрады */
+  inset: 0;          /* top/right/bottom/left: 0 — бүкіл экран */
+  z-index: -2;       /* ең артқы қабат */
+  background: #000;   /* сурет жүктелгенше қара фон */
+}
+
+/* Әр сурет — жеке қабат. Бәрі бір-бірінің үстінде тұрады. */
+.slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;      /* экранды толық жабады, пропорция бұзылмайды */
+  background-position: center; /* сурет ортасы көрінеді */
+  background-repeat: no-repeat;
+
+  opacity: 0;                              /* әдепкіде көрінбейді */
+  transition: opacity 1.5s ease-in-out;    /* CROSSFADE: 1.5 сек жұмсақ өту */
+}
+
+/* JS осы класты бір суретке қосады — сол сурет көрінеді */
+.slide.is-active {
+  opacity: 1;
+}
+
+/* ============================================================
+   2) OVERLAY — суреттің үстіндегі жеңіл қара қабат
+   ============================================================ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;                    /* slideshow-дың алдында, content-тің артында */
+  background: rgba(0, 0, 0, 0.35); /* қара, 35% мөлдірлік */
+}
+
+/* ============================================================
+   3) CONTENT — негізгі мазмұн (overlay үстінде)
+   ============================================================ */
+.content {
+  position: relative;
+  z-index: 1;               /* бәрінің алдында */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5); /* мәтінді оқуға жеңіл ету */
+}
+
+.content h1 {
+  font-size: clamp(3rem, 11vw, 7.5rem); /* экран еніне қарай өседі/кішірейеді */
+  letter-spacing: 0.02em;
+}
+
+.content p {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  opacity: 0.9;
+}
+
+/* Dulaty астындағы 2 статикалық батырма */
+.actions {
+  display: flex;
+  gap: 2.5rem;              /* батырмалар арасы кеңейтілді */
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.btn {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-block;
+  text-decoration: none;                       /* <a> болса да астын сызбау */
+  border-radius: 999px;                       /* дөңгелек бұрыштар (pill) */
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  font: inherit;
+  font-size: 1.25rem;                          /* үлкейтілді */
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 1rem 2.75rem;                       /* үлкейтілді */
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Дыбысты қосу/өшіру батырмасы — экранның төменгі оң бұрышы */
+.sound-toggle {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 2;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.sound-toggle:hover {
+  transform: scale(1.08);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Ішкі беттердегі мәтін блогы */
+.subpage-text {
+  max-width: 640px;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  line-height: 1.7;
+  opacity: 0.92;
+}
+
+/* "← артқа" сілтемесі */
+.back-link {
+  margin-top: 1.5rem;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  opacity: 0.85;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  transition: opacity 0.2s ease;
+}
+
+.back-link:hover {
+  opacity: 1;
+}
+
+/* ============================================================
+   4) Қолжетімділік — анимацияны өшіру таңдауын құрметтеу
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .slide {
+    transition: none;
+  }
+}

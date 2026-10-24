@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>persolan_site — technically</title>
+
+  <!-- Басты беттегі стильдер осында да қолданылады -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Фон слайдшоу — басты беттегідей -->
+  <div class="slideshow" id="slideshow"></div>
+
+  <!-- Қараңғы overlay -->
+  <div class="overlay"></div>
+
+  <!-- Бұл беттің мазмұны -->
+  <main class="content">
+    <h1>technically</h1>
+    <p class="subpage-text">
+      Мұнда техникалық дағдыларың, жобаларың мен қолданатын технологияларың жайлы жаз.
+    </p>
+
+    <a class="back-link" href="index.html">← артқа</a>
+  </main>
+
+  <!-- Фондық музыка. Браузер рұқсат етуі үшін бастапқыда muted + autoplay. -->
+  <audio id="bg-music" src="assets/audio/music.mp3" loop autoplay muted preload="auto"></audio>
+
+  <!-- Дыбысты қосу/өшіру батырмасы (төменгі оң бұрыш) -->
+  <button id="sound-toggle" class="sound-toggle" type="button" aria-label="Дыбысты қосу">🔇</button>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
